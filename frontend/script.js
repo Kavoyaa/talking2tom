@@ -3,7 +3,7 @@ let rage = 0;
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 let recognition;
 
-if (SpeechRecognition) {
+if (!SpeechRecognition) {
     alert("Speech recognition is not supported in this browser. Try Chrome or Edge if you want to speak to Tom. You can type to him for now.");
     document.querySelector('#micBtn').style.display = 'none'
 } else {
