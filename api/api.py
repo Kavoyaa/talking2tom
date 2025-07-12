@@ -1,4 +1,6 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
+
 import google.generativeai as genai
 from dotenv import load_dotenv
 import os
@@ -9,10 +11,12 @@ genai.configure(api_key=os.getenv("API_KEY"))
 model = genai.GenerativeModel("gemini-2.5-flash")
 
 app = Flask(__name__)
+CORS(app)
 
 # To generate the Tom's reply based on message history
 @app.route("/gen", methods=["POST"])
 def ai_response():
+    print("Received a request from frontend")
     data = request.get_json()
     rage_value = data.get("rage_value", 6)
 
