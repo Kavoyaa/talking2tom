@@ -1,12 +1,15 @@
 from flask import Flask, request, jsonify
-from google import genai
+import google.generativeai as genai
 from dotenv import load_dotenv
 import os
 
-# Loading environment variables from .env
+
 load_dotenv("../.env")
+
+genai.configure(api_key=os.getenv("API_KEY"))
+model = genai.GenerativeModel("gemini-2.5-flash")
+
 app = Flask(__name__)
-client = genai.Client(api_key=os.getenv("API_KEY"))
 
 # To generate the Tom's reply based on message history
 @app.route("/gen", methods=["POST"])
@@ -60,7 +63,7 @@ Generate the output as JSON in the following format.
         else:
             speaker = "Me"
 
-    response = client.models.generate_content(
+    response = model.generate_content(
     model="gemini-2.5-flash", contents=f"{prompt_start}\n{prompt_middle}\n{prompt_end}")
     
     return jsonify(response.text[8:-4])
@@ -109,7 +112,7 @@ Return the output in the form of JSON. Return the following JSON if you wish to 
         else:
             speaker = "Me"
 
-    response = client.models.generate_content(
+    response = model.generate_content(
     model="gemini-2.5-flash", contents=f"{prompt_start}\n{prompt_middle}\n{prompt_end}")
     
     return jsonify(response.text[8:-4])
