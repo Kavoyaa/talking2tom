@@ -16,7 +16,7 @@ pip install -r api/requirements.txt
 ```
 
 ### Setting up API key:
-1. Create a file inside api/ folder with the name `.env`.
+1. Create a file with the name `.env`.
 2. Put `API_KEY=your_key` inside the file.
 
 ### Running the API
