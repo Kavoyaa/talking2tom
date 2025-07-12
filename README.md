@@ -1,26 +1,37 @@
 # Talking2Tom
-Tom from the 2010 mobile game "My Talking Tom" has returned, but hes out to kill you? Seems like ths time YOU will be doing the talking.<br/><br/>Talking2Tom is a game in which you must convince an evil Tom to not kill you.
+Remember *My Talking Tom* from 2010? Yeah. **He remembers you too.**
 
-## Running the API
+He’s angry. He’s self-aware. He wants revenge.  
+And you're the one who has to talk your way out of it.
+
+## 🚀 Getting Started
 ### Clone the repository
 ```bash
 git clone https://github.com/Kavoyaa/talking2tom.git
-```
-```bash
 cd talking2tom
 ```
 
-### Installing required packages:
+### Install dependencies
 ```bash
-pip install -r api/requirements.txt
+pip install -r requirements.txt
 ```
 
-### Setting up API key:
-1. Create a file with the name `.env`.
-2. Put `API_KEY=your_key` inside the file.
-
-### Running the API
-```bash
-python api/api/py
+### Set up API key
+Create a file called `.env` in the root of the repo:
+```env
+API_KEY=your_gemini_api_key
 ```
-Or alternatively, use `python3` instead of `python`
+Get an API key [here](https://aistudio.google.com/app/apikey)
+
+### Run the app
+```bash
+python api/api.py
+```
+*alternatively, use `python3` instead of `python`*
+
+#### Then launch `frontend/index.html` in your browser.
+
+### Credit
+> Tom 3D Model: [Sketchfab](https://sketchfab.com/3d-models/talking-tom-f10bab0ee3864175bff87093f04a751d)
+> Environment Textures: [ambientCG](https://ambientcg.com)
+> Powered by Google Gemini via generativeai

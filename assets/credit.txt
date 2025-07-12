@@ -1,8 +1,0 @@
-keeping track of external resources in a text file for now.
-will later add these to the readme.md
-
-Tom 3D Model:
-https://sketchfab.com/3d-models/talking-tom-f10bab0ee3864175bff87093f04a751d
-
-Environment textures:
-https://ambientcg.com
