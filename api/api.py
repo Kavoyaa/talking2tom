@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 
 import google.generativeai as genai
@@ -12,9 +12,16 @@ load_dotenv("../.env")
 genai.configure(api_key=os.getenv("API_KEY"))
 model = genai.GenerativeModel("gemini-2.0-flash-lite")
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../static', template_folder='../templates')
 CORS(app)
 
+@app.route("/")
+def index():
+    return send_from_directory("../frontend", "index.html")
+
+@app.route("/<path:filename>")
+def frontend_files(filename):
+    return send_from_directory("../frontend", filename)
 
 # To generate the Tom's reply based on message history
 @app.route("/gen", methods=["POST"])

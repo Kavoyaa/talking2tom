@@ -29,7 +29,7 @@ python api/api.py
 ```
 *alternatively, use `python3` instead of `python`*
 
-#### Then launch `frontend/index.html` in your browser.
+#### App hosted at `127.0.0.1:5000`
 
 ### Credit
 > Tom 3D Model: [Sketchfab](https://sketchfab.com/3d-models/talking-tom-f10bab0ee3864175bff87093f04a751d)
