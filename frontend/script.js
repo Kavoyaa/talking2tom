@@ -12,20 +12,21 @@ if (!SpeechRecognition) {
     recognition.lang = 'en-US';
     recognition.continuous = false;
     recognition.interimResults = false;
-
+    
     recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript;
         console.log("Recognized:", transcript);
         document.querySelector('#input').value = transcript;
         document.querySelector("#btn").click()
+        document.querySelector('video').src = 'speaking.mp4'  
     };
-
+    
     recognition.onerror = (event) => {
         console.error("Speech recognition error:", event.error);
     };
-
+    
     recognition.onend = () => {
-        console.log("Speech recognition ended.");
+        console.log("Speech recognition ended."); 
     };
 }
 
@@ -80,13 +81,11 @@ function speak(text) {
     };
 
     utter.onstart = () => {
-        console.log("🟢 Speaking started");
         video.currentTime = 0;
         video.play();
     };
 
     utter.onend = () => {
-        console.log("✅ Speaking ended");
         video.currentTime = 0;
     };
 
@@ -106,5 +105,6 @@ recognition.onend = () => recognizing = false;
 document.querySelector('#micBtn').addEventListener('click', () => {
     if (!recognizing) {
         recognition.start();
+        document.querySelector('video').src = 'listening.mp4'
     }
 });
