@@ -3,10 +3,9 @@ let rage = 0;
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 let recognition;
 
-if (!SpeechRecognition) {
-    alert("Speech recognition is not supported in this browser. Try Chrome or Edge. SORRY");
-    document.body.innerText = "Switch to chrome or edge please."
-    document.body.style.color = 'white'
+if (SpeechRecognition) {
+    alert("Speech recognition is not supported in this browser. Try Chrome or Edge if you want to speak to Tom. You can type to him for now.");
+    document.querySelector('#micBtn').style.display = 'none'
 } else {
     recognition = new SpeechRecognition();
     recognition.lang = 'en-US';
@@ -57,6 +56,7 @@ window.speechSynthesis.onvoiceschanged = () => {
 };
 
 function speak(text) {
+    text = text.toLowerCase();
     const synth = window.speechSynthesis;
     const utter = new SpeechSynthesisUtterance(text);
 
