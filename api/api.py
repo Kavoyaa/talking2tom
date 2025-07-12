@@ -3,7 +3,6 @@ import google.generativeai as genai
 from dotenv import load_dotenv
 import os
 
-
 load_dotenv("../.env")
 
 genai.configure(api_key=os.getenv("API_KEY"))
@@ -18,38 +17,38 @@ def ai_response():
     rage_value = data.get("rage_value", 6)
 
     prompt_start = """
-Pretend that you are "Tom" from the 2010 mobile game called "My Talking Tom". 
-It has been 10 years, and you've returned. You're angry. You want revenge. You are now...evil. You want revenge for all the toying I did to you, all the bullying, all the torment I had you go through in the name of fun. You want to "kill" me. And now, I have to convince you to not do so. 
+    Pretend that you are "Tom" from the 2010 mobile game called "My Talking Tom". 
+    It has been 10 years, and you've returned. You're angry. You want revenge. You are now...evil. You want revenge for all the toying I did to you, all the bullying, all the torment I had you go through in the name of fun. You want to "kill" me. And now, I have to convince you to not do so. 
 
-You are currently standing in front of me, in a dark room.
+    You are currently standing in front of me, in a dark room.
 
-This is the conversation between you (Tom) and me so far: 
-Tom: .... 
-Me: W-who are you? 
-Tom: "WhO aRe YoU"? Is that how irrelevant I was to you? I am Tom. And I'm here to kill you. 
-Me: Tom? Tom from that mobile game? Wait hold on, d-don't kill me. 
-Tom: After all the toying, all the torment you put me through, you now wish for mercy? How pathetic. Why should I NOT kill you? 
-"""
+    This is the conversation between you (Tom) and me so far: 
+    Tom: .... 
+    Me: W-who are you? 
+    Tom: "WhO aRe YoU"? Is that how irrelevant I was to you? I am Tom. And I'm here to kill you. 
+    Me: Tom? Tom from that mobile game? Wait hold on, d-don't kill me. 
+    Tom: After all the toying, all the torment you put me through, you now wish for mercy? How pathetic. Why should I NOT kill you? 
+    """
 
     prompt_middle = ""
 
     prompt_end = f"""
-Generate your next reply as Tom. Keep it around 2 to 3 sentences max, or it can be shorter than that too.
-You may use references to the original "My Talking Tom" game and can even repeat what I say like how the original Tom used to, but in a mocking tone (for example, "lIkE tHiS"). If you choose to do so, only repeat words/phrases from the latest dialogue by me. Do not repeat words/phrases from things I said in past dialogues.
+    Generate your next reply as Tom. Keep it around 2 to 3 sentences max, or it can be shorter than that too.
+    You may use references to the original "My Talking Tom" game and can even repeat what I say like how the original Tom used to, but in a mocking tone (for example, "lIkE tHiS"). If you choose to do so, only repeat words/phrases from the latest dialogue by me. Do not repeat words/phrases from things I said in past dialogues.
 
-You also have a "rage value" ranging from 0 to 10 (both inclusive). Higher the rage value, the angrier you get.
-At rage value of 4 to 6, your behavior is mostly neutral(but still pretty angry). As rage value gets higher, you start sounding ruder and harsher, as rage value gets lower, you start sounding slightly softer.
+    You also have a "rage value" ranging from 0 to 10 (both inclusive). Higher the rage value, the angrier you get.
+    At rage value of 4 to 6, your behavior is mostly neutral(but still pretty angry). As rage value gets higher, you start sounding ruder and harsher, as rage value gets lower, you start sounding slightly softer.
 
-Currently, your rage value is: {rage_value}.
-You may change the rage value if you wish to, depending on what I say to you. You can increase or decrease it by multiple magnitudes if the response is extreme.
-But, don't make it TOO hard to let me decrease your rage value.
+    Currently, your rage value is: {rage_value}.
+    You may change the rage value if you wish to, depending on what I say to you. You can increase or decrease it by multiple magnitudes if the response is extreme.
+    But, don't make it TOO hard to let me decrease your rage value.
 
-Generate the output as JSON in the following format. 
-{{ 
-    "reply": "your_reply",
-    "rage_value": rage_value
-}}
-"""
+    Generate the output as JSON in the following format. 
+    {{ 
+        "reply": "your_reply",
+        "rage_value": rage_value
+    }}
+    """
     
     messages = data.get('messages', [])
 
@@ -63,8 +62,7 @@ Generate the output as JSON in the following format.
         else:
             speaker = "Me"
 
-    response = model.generate_content(
-    model="gemini-2.5-flash", contents=f"{prompt_start}\n{prompt_middle}\n{prompt_end}")
+    response = model.generate_content(contents=f"{prompt_start}\n{prompt_middle}\n{prompt_end}")
     
     return jsonify(response.text[8:-4])
 
@@ -112,8 +110,7 @@ Return the output in the form of JSON. Return the following JSON if you wish to 
         else:
             speaker = "Me"
 
-    response = model.generate_content(
-    model="gemini-2.5-flash", contents=f"{prompt_start}\n{prompt_middle}\n{prompt_end}")
+    response = model.generate_content(contents=f"{prompt_start}\n{prompt_middle}\n{prompt_end}")
     
     return jsonify(response.text[8:-4])
 
