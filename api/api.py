@@ -10,7 +10,7 @@ import re
 load_dotenv("../.env")
 
 genai.configure(api_key=os.getenv("API_KEY"))
-model = genai.GenerativeModel("gemini-2.5-flash")
+model = genai.GenerativeModel("gemini-2.0-flash-lite")
 
 app = Flask(__name__)
 CORS(app)
