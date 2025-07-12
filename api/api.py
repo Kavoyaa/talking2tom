@@ -3,11 +3,12 @@ from google import genai
 from dotenv import load_dotenv
 import os
 
-
+# Loading environment variables from .env
 load_dotenv()
 app = Flask(__name__)
 client = genai.Client(api_key=os.getenv("API_KEY"))
 
+# To generate the Tom's reply based on message history
 @app.route("/gen", methods=["POST"])
 def ai_response():
     prompt_start = """
@@ -36,9 +37,9 @@ Generate the output as JSON in the following format.
 """
 
     data = request.get_json()
-    print(data)
     messages = data.get('messages', [])
 
+    # Inserting the message history into the prompt
     speaker = "Me"
     for i in messages:
         prompt_middle += f"{speaker}: {i}\n"
@@ -48,11 +49,12 @@ Generate the output as JSON in the following format.
         else:
             speaker = "Me"
 
-
     response = client.models.generate_content(
     model="gemini-2.5-flash", contents=f"{prompt_start}\n{prompt_middle}\n{prompt_end}")
+    
     return jsonify(response.text[8:-4])
 
+# To determine if Tom lets the user live or not
 @app.route("/status", methods=["POST"])
 def alive_status():
     prompt_start = """
@@ -86,6 +88,7 @@ Return the output in the form of JSON. Return the following JSON if you wish to 
     print(data)
     messages = data.get('messages', [])
 
+    # Inserting the message history into the prompt
     speaker = "Me"
     for i in messages:
         prompt_middle += f"{speaker}: {i}\n"
@@ -95,9 +98,9 @@ Return the output in the form of JSON. Return the following JSON if you wish to 
         else:
             speaker = "Me"
 
-
     response = client.models.generate_content(
     model="gemini-2.5-flash", contents=f"{prompt_start}\n{prompt_middle}\n{prompt_end}")
+    
     return jsonify(response.text[8:-4])
 
 if __name__ == "__main__":
