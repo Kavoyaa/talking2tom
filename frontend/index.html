@@ -5,16 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Talking2Tom</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+    </style>
 </head>
 <body>
     <script defer src="script.js"></script>
-    <div class="phone">
-        <video muted loop src="speaking.mp4"></video>
+    <div class="phone-container">
+        <div class="phone">
+            <div class="phone-top">
+                <div class="phone-speaker"></div>
+            </div>
+            <div class="phone-navbar">
+                <p class="roboto-medium">3:00 A.M 🛜</p>
+                <p class="roboto-medium">📶🔋84%</p>
+            </div>
+            <video muted loop src="../assets/speak.mp4"></video>
+            <div class="phone-bottom">
+                <div class="phone-button"></div>
+            </div>
+        </div>
     </div>
     <div>
         <button id="micBtn">speak</button>
         <input id="input" placeholder="enter text">
-        <button id="btn">send</button>
+        <button id="btn">Send</button>
     </div>
 </body>
 </html>

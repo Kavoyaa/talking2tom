@@ -4,7 +4,6 @@ body {
     background: radial-gradient(rgb(17, 17, 17),rgb(0, 0, 0));
     height: 100vh;
     width: 100vw;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,10 +11,84 @@ body {
     gap: 1rem;
 }
 
-.phone {
-    border: 20px solid black;
+.roboto-medium {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
 }
 
+.phone-container {
+    border-top: 1px solid rgb(29, 29, 29);
+    border-right: 1px solid rgb(29, 29, 29);
+    border-left: 1px solid rgb(16, 16, 16);
+    border-bottom: 1px solid rgb(16, 16, 16);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.phone {
+    display: flex;
+    flex-direction: column;
+    border-left: 12px solid black;
+    border-right: 12px solid black; 
+    border-radius: 12px;
+}
+
+.phone-top {
+    background-color: black;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.phone-speaker {
+    background-color: rgb(23, 23, 23);
+    margin-top: 15  px;
+    height: 3px;
+    width: 100px;
+    border-top: 1px solid rgb(40, 40, 40);
+    border-right: 1px solid rgb(40, 40, 40);
+    border-radius: 4px;
+}
+
+.phone-navbar {
+    background-color: black;
+    height: 13px;
+    text-align: right;
+    color: rgb(167, 171, 171);
+    padding: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    filter: saturate(60%);
+}
+
+.phone-navbar > p {
+    font-size: 12px;
+}
+
+.phone-bottom {
+    background-color: black;
+    height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.phone-button {
+    background-color: rgb(7, 7, 7);
+    height: 27px;
+    width: 50px;
+    border-top: 1px solid rgb(33, 33, 33);
+    border-right: 1px solid rgb(33, 33, 33);
+    border-bottom: 1px solid rgb(21, 21, 21);
+    border-left: 1px solid rgb(21, 21, 21);
+    border-radius: 5px;
+}
 
 .phone > video {
     width: 300px;
