@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 import os
 
 # Loading environment variables from .env
-load_dotenv()
+load_dotenv("../.env")
 app = Flask(__name__)
 client = genai.Client(api_key=os.getenv("API_KEY"))
 
