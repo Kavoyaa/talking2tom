@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 import os
 
 # Loading environment variables from .env
-load_dotenv()
+load_dotenv("../.env")
 app = Flask(__name__)
 client = genai.Client(api_key=os.getenv("API_KEY"))
 
@@ -28,8 +28,9 @@ Tom: After all the toying, all the torment you put me through, you now wish for 
     prompt_middle = ""
 
     prompt_end = """
-Generate your next reply as Tom. Keep it around 3 to 4 sentences max, or it can be shorter than that too.
-You may use references to the original "My Talking Tom" game and can even repeat what I say like how the original Tom used to, but in a mocking tone (for example, "lIkE tHiS"). 
+Generate your next reply as Tom. Keep it around 2 to 3 sentences max, or it can be shorter than that too.
+You may use references to the original "My Talking Tom" game and can even repeat what I say like how the original Tom used to, but in a mocking tone (for example, "lIkE tHiS"). If you choose to do so, only repeat words/phrases from the latest dialogue by me. Do not repeat words/phrases from things I said in past dialogues.
+
 Generate the output as JSON in the following format. 
 { 
     "reply": "your_reply" 
