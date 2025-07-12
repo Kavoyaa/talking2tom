@@ -1,4 +1,4 @@
-
+let rage = 0;
 async function talkToTom(messages, rage_value) {
     const res = await fetch("http://127.0.0.1:5000/gen", {
         method: "POST",
@@ -10,12 +10,14 @@ async function talkToTom(messages, rage_value) {
     });
 
     const data = await res.json();
-    console.log(data);
+    rage = data.rage_value;
+    console.log(rage)
+    alert(data.reply)
     return data;
 }
 
 document.querySelector('#btn').addEventListener('click', () => {
-    let message = document.querySelector('#input').textContent
+    let message = document.querySelector('#input').value
 
-    talkToTom([message], 5)
+    talkToTom([message], rage)
 })

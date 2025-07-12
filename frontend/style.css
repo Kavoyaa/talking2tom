@@ -16,19 +16,9 @@ body {
     border: 20px solid black;
 }
 
-/* basically, im overlaying both the still image and the video */
-/* on top of each other. Then ill turn on the video only when tom is speaking. */
-.phone > img {
-    width: 300px;
-    position: relative;
-    margin-left: -300px;  /* behind the video*/
-}
 
 .phone > video {
     width: 300px;
-    position: relative;
-    z-index: 2;
-    opacity: 0;
 }
 
 input {

@@ -4,6 +4,8 @@ from flask_cors import CORS
 import google.generativeai as genai
 from dotenv import load_dotenv
 import os
+import json
+import re
 
 load_dotenv("../.env")
 
@@ -12,6 +14,7 @@ model = genai.GenerativeModel("gemini-2.5-flash")
 
 app = Flask(__name__)
 CORS(app)
+
 
 # To generate the Tom's reply based on message history
 @app.route("/gen", methods=["POST"])
@@ -52,9 +55,11 @@ def ai_response():
         "reply": "your_reply",
         "rage_value": rage_value
     }}
-    """
     
-    messages = data.get('messages', [])
+    DO NOT put this in a codeblock. just plain text output.
+    """
+
+    messages = data.get("messages", [])
 
     # Inserting the message history into the prompt
     speaker = "Me"
@@ -66,9 +71,17 @@ def ai_response():
         else:
             speaker = "Me"
 
-    response = model.generate_content(contents=f"{prompt_start}\n{prompt_middle}\n{prompt_end}")
-    
-    return jsonify(response.text[8:-4])
+    response = model.generate_content(
+        contents=f"{prompt_start}\n{prompt_middle}\n{prompt_end}"
+    )
+
+    try:
+        parsed = json.loads(response.text)
+        return jsonify(parsed)
+    except Exception as e:
+        print(e)
+        return('no')
+
 
 # To determine if Tom lets the user live or not
 @app.route("/status", methods=["POST"])
@@ -102,7 +115,7 @@ Return the output in the form of JSON. Return the following JSON if you wish to 
 
     data = request.get_json()
     print(data)
-    messages = data.get('messages', [])
+    messages = data.get("messages", [])
 
     # Inserting the message history into the prompt
     speaker = "Me"
@@ -114,9 +127,12 @@ Return the output in the form of JSON. Return the following JSON if you wish to 
         else:
             speaker = "Me"
 
-    response = model.generate_content(contents=f"{prompt_start}\n{prompt_middle}\n{prompt_end}")
-    
+    response = model.generate_content(
+        contents=f"{prompt_start}\n{prompt_middle}\n{prompt_end}"
+    )
+
     return jsonify(response.text[8:-4])
+
 
 if __name__ == "__main__":
     app.run(debug=True)
