@@ -39,7 +39,12 @@ function handleTyping(e) {
 
                 // typed correctly
                 tomHealth -= 10
-                tomHealthElm.innerText = `Tom: ${tomHealth}HP`;
+                tomHealthElm.innerHTML = `Tom: <span style="color: red;">${tomHealth}HP</span>`;
+
+                setTimeout(function() {
+                    tomHealthElm.innerHTML = `Tom: ${tomHealth}HP`;
+                }, 250)
+                
                 startTimer();
 
                 game('no you cannot')
@@ -93,10 +98,18 @@ function startTimer() {
             
             timerDisplay.parentElement.fontSize = "32px"
             timerDisplay.parentElement.style.color = 'white'
+
             myHealth -= 20
             tomHealth += 5
-            myHealthElm.innerText = `You: ${myHealth}HP`;
-            tomHealthElm.innerText = `Tom: ${tomHealth}HP`;
+
+            myHealthElm.innerHTML = `You: <span style="color: red;">${myHealth}HP</span>`;
+            tomHealthElm.innerHTML = `Tom: <span style="color: green;">${tomHealth}HP</span>`;
+
+            setTimeout(function() {
+                myHealthElm.innerHTML = `You: ${myHealth}HP`;
+                tomHealthElm.innerHTML = `Tom: ${tomHealth}HP`;
+            }, 250)
+
             game();
         }
     }, 1000);
