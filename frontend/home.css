@@ -13,7 +13,7 @@ body {
 
 .container {
     display: flex;
-    overflow: hidden;
+    /* overflow: hidden; */
     flex-direction: column;
 }
 
@@ -22,13 +22,17 @@ body {
     flex-direction: column;
     gap: 0px;
     line-height: 0;
-    /* background-color: red; */
+    max-width: 500px;
 }
 
 .options {
     padding-left: 100px;
     padding-top: 100px;
     /* flex: 1; */
+}
+
+.description-container {
+    max-width: 650px;
 }
 
 h1 {
