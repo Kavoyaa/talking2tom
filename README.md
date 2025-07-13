@@ -32,6 +32,7 @@ python api/api.py
 #### App hosted at `127.0.0.1:5000`
 
 ### Credit
-> Tom 3D Model: [Sketchfab](https://sketchfab.com/3d-models/talking-tom-f10bab0ee3864175bff87093f04a751d)
-> Environment Textures: [ambientCG](https://ambientcg.com)
-> Powered by Google Gemini via generativeai
+> Tom 3D Model: [Sketchfab](https://sketchfab.com/3d-models/talking-tom-f10bab0ee3864175bff87093f04a751d)<br/>
+> Environment Textures: [ambientCG](https://ambientcg.com)<br/>
+> Powered by Google Gemini via generativeai<br/>
+> Icons by [Bootsrap Icons](https://icons.getbootstrap.com/)
