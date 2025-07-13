@@ -156,9 +156,10 @@ document.querySelector('#btn').addEventListener('click', async () => {
 })
 
 let recognizing = false;
-
-recognition.onstart = () => recognizing = true;
-recognition.onend = () => recognizing = false;
+if (recognition) {
+    recognition.onstart = () => recognizing = true;
+    recognition.onend = () => recognizing = false;
+}
 
 document.querySelector('#micBtn').addEventListener('click', () => {
     if (!recognizing) {
