@@ -1,0 +1,50 @@
+body {
+    background-color: black;
+    color:aliceblue;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    margin: 0;
+    background-image: url("EvilTom.gif");
+    background-repeat: no-repeat;
+    background-position: 30vw 100%;
+    background-attachment: fixed;
+}
+
+.container {
+    display: flex;
+    overflow: hidden;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    line-height: 0;
+    /* background-color: red; */
+}
+
+.options {
+    padding-left: 100px;
+    padding-top: 100px;
+    /* flex: 1; */
+}
+
+h1 {
+    font-size: 80px;
+    color: rgb(213, 181, 18);
+    
+}
+
+h2 {
+    font-size: 50px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    color: rgb(165, 168, 171);
+}
