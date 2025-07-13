@@ -1,0 +1,35 @@
+body {
+    background-color: black;
+    color: aliceblue;
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 50px;
+    overflow: hidden;
+}
+
+.typing-material {
+    text-align: center;
+    width: 60vw;
+}
+
+textarea {
+    width: 50vw;
+    height: 200px;
+    padding: 10px;
+    border: 1px solid antiquewhite;
+    border-radius: 5px;
+    background-color: rgb(15, 15, 15);
+    outline: none;
+    color: antiquewhite;
+    font-family: "Roboto", sans-serif;
+    font-size: medium;
+}
