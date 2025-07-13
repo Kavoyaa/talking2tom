@@ -2,7 +2,8 @@
 body {
     margin: 0;
     padding: 0;
-    background: radial-gradient(rgb(17, 17, 17),rgb(0, 0, 0));
+    /* background: radial-gradient(rgb(17, 17, 17),rgb(0, 0, 0)); */
+    background-color: black;
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -14,6 +15,11 @@ body {
     font-family: "Roboto", sans-serif;
 }
 
+.tom-eyes-img {
+    width: 400px;
+    height: 280px;
+    object-fit: fill;
+}
 
 #typing-container {
   position: relative;
