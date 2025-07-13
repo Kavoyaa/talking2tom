@@ -8,7 +8,7 @@ if (!SpeechRecognition) {
     document.querySelector('#micBtn').style.display = 'none'
 } else {
     recognition = new SpeechRecognition();
-    recognition.lang = 'en-US';
+    recognition.lang = 'en-IN';
     recognition.continuous = false;
     recognition.interimResults = false;
     
@@ -36,16 +36,11 @@ async function talkToTom(messages, rage_value) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             messages: messages,
-            rage_value: rage_value // number between 0-10
+            rage_value: rage_value
         })
     });
 
     const data = await res.json();
-    rage = data.rage_value;
-
-    console.log(data.reply, rage);
-    speak(data.reply);
-
     return data;
 }
 
@@ -92,9 +87,27 @@ function speak(text) {
     synth.speak(utter);
 }
 
-document.querySelector('#btn').addEventListener('click', () => {
+document.querySelector('#btn').addEventListener('click', async () => {
+    
     let message = document.querySelector('#input').value
-    talkToTom([message], rage)
+    let tomChat = document.querySelector('.chat-tom');
+    let meChat = document.querySelector('.chat-me');
+
+    let meMessage = document.createElement('span');
+    meMessage.innerText = message
+    meChat.appendChild(meMessage);
+    
+    let response = await talkToTom([message], rage)
+    
+    speak(response.reply)
+    rage = response.rage_value;
+    
+    console.log(response.reply, rage);
+    let tomMessage = document.createElement('span');
+    tomMessage.innerText = response.reply
+    tomChat.appendChild(tomMessage);
+
+    
 })
 
 let recognizing = false;

@@ -108,3 +108,49 @@ button {
     padding: 5px;
     cursor: pointer;
 }
+
+.center-container {
+    display: flex;
+    color: white;
+    width: 100%;
+    justify-content: center;
+}
+
+.chat-container > span {
+    background: #40404042;
+    padding: 1rem;
+    border-radius: .5rem;
+    box-shadow: 0px 3px 9px #000000, 0px -2px 6px #474747;
+}
+
+.chat-container {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    overflow: auto;
+    max-height: 660px;
+    mask-image: (180deg, transparent,#000, transparent);
+    -webkit-mask-image: linear-gradient(180deg, transparent,#000, transparent);
+
+    scrollbar-width: thin;
+    scrollbar-color: #242424 transparent;
+    justify-content: center;
+}
+
+/* FALLBACK in case scrollbar-width doesnt work */
+.chat-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-container::-webkit-scrollbar-track {
+    background: transparent
+}
+
+.chat-container::-webkit-scrollbar-thumb {
+    background-color: #242424;
+    border-radius: 10px;
+    border: 2px solid transparent;
+}
+
