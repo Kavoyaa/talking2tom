@@ -69,7 +69,7 @@ body {
 }
 
 .container {
-  display: flex;
+  display: none;
   justify-content: space-between;
   align-items: center;
   width: calc(80% + 40px);
@@ -84,4 +84,9 @@ h2 {
   font-size: 32px;
   font-weight: bold;
 
+}
+
+#tomExposition {
+  color: red;
+  font-size: 30px;
 }

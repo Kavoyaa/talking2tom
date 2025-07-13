@@ -55,7 +55,7 @@ function speak(text) {
     const synth = window.speechSynthesis;
     const utter = new SpeechSynthesisUtterance(text);
 
-    utter.pitch = 0.8;
+    utter.pitch = 0.3;
     utter.rate = 1.05;
 
     // Make sure voices are ready
@@ -132,8 +132,6 @@ function recieveMessage(msg) {
     tomChat.scrollTop = tomChat.scrollHeight;
 }
 
-
-
 document.querySelector('#btn').addEventListener('click', async () => {
     
     let message = document.querySelector('#input').value;
@@ -200,7 +198,7 @@ async function gameCutscene(){
     await sleep(2000)
     recieveMessage(' You really don\'t remember? Is that how irrelevant I was to you? I am Tom.')
     await sleep(6000)
-    sendMessage('...Tom? From that game? All those years ago?')
+    sendMessage('...Talking Tom? From that game? All those years ago?')
     await sleep(5000)
     recieveMessage('...')
     await sleep(3000)
@@ -211,14 +209,19 @@ async function gameCutscene(){
     document.querySelector('.actions').style.animation = 'fadeIn 1s ease forwards'
 }
 
+let clicked = false;
+
 document.querySelector('.phone-button').addEventListener('click', () => {
-    document.querySelector('a.tip').style.animation = 'fadeOut 1s ease forwards'
-    gameCutscene();
-    document.querySelector('.phone>video').style.animation = 'turnOn 5s ease forwards'
-    const audio = document.createElement("audio");
-    audio.src = "music/horror.mp3"
-    audio.volume = 0.4;
-    audio.play();
+    if(!clicked) {
+        document.querySelector('a.tip').style.animation = 'fadeOut 1s ease forwards'
+        gameCutscene();
+        document.querySelector('.phone>video').style.animation = 'turnOn 5s ease forwards'
+        const audio = document.createElement("audio");
+        audio.src = "music/horror.mp3"
+        audio.volume = 0.4;
+        audio.play();
+    }
+    clicked = true;
 })
 
 function gameLevel2()

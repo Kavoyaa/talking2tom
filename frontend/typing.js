@@ -23,6 +23,26 @@ function startTypingTest(text = target) {
     window.addEventListener('keydown', handleTyping);
 }
 
+const typingPrompts = [
+    "you thought you could run?",
+    "i'm not just a pet anymore",
+    "every tap, every poke... i remember",
+    "you liked watching me suffer?",
+
+    "WHY DID YOU LEAVE ME IN THE DARK?",
+    "say sorry RIGHT NOW or else...",
+    "your silence SCREAMS guilt!",
+    "no more GAMES. no more FUN.",
+    "you TAPPED and LAUGHED. now it's MY turn.",
+
+    "you tHiNk this is oVeR?",
+    "nO mErCy for yOu today >:)",
+    "I hAvE wAiTeD tEn yEaRs FoR tHiS >:DDDD",
+    "Running WONT sAVe yOu now!",
+    "JuSt accept deFEAT!"
+];
+
+let lvl = 0;
 function handleTyping(e) {
     if (e.key.length !== 1) return;
 
@@ -37,17 +57,20 @@ function handleTyping(e) {
             setTimeout(() => {
                 container.style.display = "none";
 
-                // typed correctly
                 tomHealth -= 10
                 tomHealthElm.innerHTML = `Tom: <span style="color: red;">${tomHealth}HP</span>`;
 
                 setTimeout(function() {
                     tomHealthElm.innerHTML = `Tom: ${tomHealth}HP`;
                 }, 250)
-                
+                if (tomHealth <= 0){
+                    // player won
+                    clearInterval(timer);
+                    return endGame('player')
+                }
                 startTimer();
 
-                game('no you cannot')
+                game(typingPrompts[lvl])
             }, 500);
         }
     }
@@ -110,7 +133,12 @@ function startTimer() {
                 tomHealthElm.innerHTML = `Tom: ${tomHealth}HP`;
             }, 250)
 
-            game();
+            if (myHealth <= 0) {
+                // player lost
+                clearInterval(timer);
+                return endGame('tom')
+            }
+            game(typingPrompts[lvl]);
         }
     }, 1000);
 }
@@ -120,8 +148,52 @@ document.getElementById("bg-music").play();
 
 function game(text)
 {
+    document.querySelectorAll('.container').forEach((container) => {
+        container.style.display = 'flex'
+    })
     startTypingTest(text);
     startTimer();
+    lvl += 1;
 }
 
-game()
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function exposition()
+{
+    let text = document.getElementById("tomExposition");
+    await sleep(2000)
+    text.innerText = 'Repeating all those words.....'
+    await sleep(3000)
+    text.innerText = '...That MIND NUMBING torture...'
+    await sleep(3000)
+    text.innerText = 'You just never shut up... did you????'
+    await sleep(3000)
+    text.innerText = 'You humans disgust me.....'
+    await sleep(3000)
+    text.innerText = "How about a taste.."
+    await sleep(2000)
+    text.innerText = 'OF YOUR OWN MEDICINE???'
+    await sleep(1000)
+    text.style.display = 'none'
+    game()
+}
+
+exposition();
+
+
+function endGame(winner) {
+    document.body.innerText = ''
+    let verdict = document.createElement("span");
+    
+    if(winner == 'tom') {
+        verdict.innerHTML = '<span>You died. <br>Tom had his revenge.<br><br>He may never recover from his trauma....<br><br><br><br>But he does rest easy now.</span>'
+    }
+    else {
+        verdict.innerHTML = '<span>Tom died. You killed him, one final time. <br> Are you fulfilled? Did Tom deserve that, after years and years of torture? <br><br>Alas, he\'s not around for it to matter anymore. <br><br><br><br>congrats. you win.</span>'
+
+    }
+    document.body.appendChild(verdict)
+
+}
