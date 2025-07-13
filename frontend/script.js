@@ -31,7 +31,7 @@ if (!SpeechRecognition) {
 
 
 async function talkToTom(messages, rage_value) {
-    const res = await fetch("https://talking2tom.vercel.app/gen", {
+    const res = await fetch("https://talking2tom-git-main-kavoyas-projects.vercel.app/gen", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
