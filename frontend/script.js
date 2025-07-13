@@ -87,28 +87,66 @@ function speak(text) {
     synth.speak(utter);
 }
 
+function sendMessage(msg) {
+    const meChat = document.querySelector('.chat-me');
+    const tomChat = document.querySelector('.chat-tom');
+
+    const meMessage = document.createElement('span');
+    meMessage.innerText = msg;
+    meMessage.style.display = 'block';
+
+    const lastTomMsg = tomChat.lastElementChild;
+    const lastMeMsg = meChat.lastElementChild;
+
+    if (!lastTomMsg || !lastMeMsg) {
+        meMessage.style.marginTop = '50px';
+    } else {
+        const spacing = Math.min(lastTomMsg.offsetHeight * 0.5, 60);
+        meMessage.style.marginTop = `${spacing}px`;
+    }
+
+    meChat.appendChild(meMessage);
+    meChat.scrollTop = meChat.scrollHeight;
+}
+
+
+function recieveMessage(msg) {
+    if (msg != '...')
+        speak(msg);
+
+    const tomChat = document.querySelector('.chat-tom');
+    const meChat = document.querySelector('.chat-me');
+
+    const tomMessage = document.createElement('span');
+    tomMessage.innerText = msg;
+    tomMessage.style.display = 'block';
+
+    const lastMeMsg = meChat.lastElementChild;
+
+    if (lastMeMsg) {
+        const spacing = Math.min(lastMeMsg.offsetHeight * 0.5, 60);
+        tomMessage.style.marginTop = `${spacing}px`;
+    }
+
+    tomChat.appendChild(tomMessage);
+    tomChat.scrollTop = tomChat.scrollHeight;
+}
+
+
+
 document.querySelector('#btn').addEventListener('click', async () => {
     
-    let message = document.querySelector('#input').value
-    let tomChat = document.querySelector('.chat-tom');
-    let meChat = document.querySelector('.chat-me');
-
-    let meMessage = document.createElement('span');
-    meMessage.innerText = message
-    meChat.appendChild(meMessage);
+    let message = document.querySelector('#input').value;
+    sendMessage(message);
     
-    let response = await talkToTom([message], rage)
+    let response = await talkToTom([message], rage);
     
-    speak(response.reply)
     rage = response.rage_value;
-    setRage(rage)
-    
-    console.log(response.reply, rage);
-    let tomMessage = document.createElement('span');
-    tomMessage.innerText = response.reply
-    tomChat.appendChild(tomMessage);
 
-    
+    setRage(rage);
+    recieveMessage(response.reply);
+
+    console.log(response.reply, rage);    
 })
 
 let recognizing = false;
@@ -142,3 +180,28 @@ function setRage(rageValue){
     }
     setRageBlockColors();
 }
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function gameCutscene(){
+    await sleep(4300)
+    recieveMessage('...')
+    await sleep(3000)
+    sendMessage('Wh... Who are you?')
+    await sleep(2000)
+    recieveMessage(' You really don\'t remember? Is that how irrelevant I was to you? I am Tom.')
+    await sleep(6000)
+    sendMessage('...Tom? From that game? All those years ago?')
+    await sleep(5000)
+    recieveMessage('...')
+    await sleep(3000)
+    sendMessage('What happened to you?')
+    await sleep(5000)
+    document.querySelector('.rage-meter').style.animation = 'fadeIn 1s ease forwards'
+    recieveMessage('YOU. happened to me. YOU put me through TORMENT. I HATE YOU. I WANT TO KILL YOU.')
+    document.querySelector('.actions').style.animation = 'fadeIn 1s ease forwards'
+}
+
+gameCutscene()
