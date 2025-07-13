@@ -101,6 +101,7 @@ document.querySelector('#btn').addEventListener('click', async () => {
     
     speak(response.reply)
     rage = response.rage_value;
+    setRage(rage)
     
     console.log(response.reply, rage);
     let tomMessage = document.createElement('span');
@@ -121,3 +122,23 @@ document.querySelector('#micBtn').addEventListener('click', () => {
         document.querySelector('video').src = 'listening.mp4'
     }
 });
+
+
+function setRageBlockColors() {
+    let blocks = document.querySelectorAll('.rage-meter-inner > div');
+    blocks.forEach((block, index) => {
+        block.style.backgroundPosition = `-${index * 20}px 0px`;
+    });
+}
+
+function setRage(rageValue){
+    let rageParent = document.querySelector(".rage-meter-inner");
+    rageParent.innerText = ""
+
+    for (let i = 0; i < rageValue; i++) 
+    {
+        let block = document.createElement('div')
+        rageParent.appendChild(block)
+    }
+    setRageBlockColors();
+}
