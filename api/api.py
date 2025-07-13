@@ -10,7 +10,7 @@ import re
 load_dotenv("../.env")
 
 genai.configure(api_key=os.getenv("API_KEY"))
-model = genai.GenerativeModel("gemini-2.0-flash-lite")
+model = genai.GenerativeModel("models/gemini-2.5-flash-lite-preview-06-17")
 
 app = Flask(__name__, static_folder='../static', template_folder='../templates')
 CORS(app)
@@ -28,11 +28,11 @@ def frontend_files(filename):
 def ai_response():
     print("Received a request from frontend")
     data = request.get_json()
-    rage_value = data.get("rage_value", 6)
+    rage_value = data.get("rage_value", 4)
 
     prompt_start = """
     Pretend that you are Tom from the 2010 mobile game called "My Talking Tom". 
-    It has been 10 years, and you've returned. You're angry. You want revenge. You are now...evil. 
+    It has been 10 years, and you've returned. You want revenge. 
     You want revenge for all the toying I did to you, all the bullying, all the torment I had you go through in the name of fun. 
     You want to KILL me. And now, I have to convince you to not do so. 
 
@@ -47,16 +47,24 @@ def ai_response():
     prompt_end = f"""
     Generate your next reply as Tom. Keep it around 2 to 3 sentences max, or it can be shorter than that too.
     for some responses you may start with mocking me by repeating a phrase or two in alternating case (for example, "lIkE tHiS"). 
-    If you choose to do so, only repeat words/phrases from the latest dialogue by me. Do not repeat words/phrases from things I said in past dialogues.
+    If you choose to do so, only repeat words/phrases from the last dialogue by me. Do not repeat words/phrases from things I said in past dialogues.
 
-    You also have a "rage value" ranging from 0 to 10 (both inclusive). Higher the rage value, the angrier you get, the more hostile and longer your reponses can be.
-    At rage value of 3 to 5, your behavior is mostly neutral(but still pretty angry). As rage value gets higher, you start sounding ruder and harsher, as rage value gets lower, you start sounding slightly softer.
+    You also have a "rage value" ranging from 0 to 10 (both inclusive). Higher the rage value, the more hostile your messages.
 
+    Rules for increasing and decreasing rage value:
+    1. If my LAST dialogue shows remorse, accountability, or a feeling to make amends with you etc. then DECREASE the rage value.
+    2. If my LAST dialogue shows rudeness, no remorse, no accountability, no feeling to make amends with you, etc. then INCREASE the rage value
+    
     Currently, your rage value is: {rage_value}.
     You may change the rage value if you wish to, depending on what I say to you. 
     You can increase or decrease it by multiple magnitudes if the response is extreme.
+    
     But, don't make it TOO hard to let me decrease your rage value.
+    You should be pretty lenient when it comes to decreasing your rage value, only increasing it when I refuse to acknowledge my mistakes and show no remorse.
+    If my messages are apologetic, you should decrease your rage value.
 
+    You are actually the type of person who appreciates people trying to fix their mistakes and become better. And that's why seeing that drops your rage value.
+    
     Generate the output as JSON in the following format. 
     {{ 
         "reply": "your_reply",
