@@ -152,6 +152,8 @@ document.querySelector('#btn').addEventListener('click', async () => {
         
     }
 
+    document.querySelector("#input").value = ""
+
     console.log(response.reply, rage);    
 })
 
