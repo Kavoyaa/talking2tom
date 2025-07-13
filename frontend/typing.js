@@ -93,8 +93,10 @@ function startTimer() {
             
             timerDisplay.parentElement.fontSize = "32px"
             timerDisplay.parentElement.style.color = 'white'
-            myHealth -= 10
+            myHealth -= 20
+            tomHealth += 5
             myHealthElm.innerText = `You: ${myHealth}HP`;
+            tomHealthElm.innerText = `Tom: ${tomHealth}HP`;
             game();
         }
     }, 1000);
