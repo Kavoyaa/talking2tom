@@ -17,6 +17,8 @@ pip install -r requirements.txt
 ```
 
 ### Set up API key
+> By default the project uses the endpoint hosted on vercel. If you want to host your own API locally, `frontend/script.js:line34`, update the API endpoint to point locally and follow these steps:
+
 Create a file called `.env` in the root of the repo:
 ```env
 API_KEY=your_gemini_api_key
