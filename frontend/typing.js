@@ -122,7 +122,6 @@ function game(text)
 {
     startTypingTest(text);
     startTimer();
-    
 }
 
 game()

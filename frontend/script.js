@@ -142,9 +142,15 @@ document.querySelector('#btn').addEventListener('click', async () => {
     let response = await talkToTom([message], rage);
     
     rage = response.rage_value;
-
-    setRage(rage);
-    recieveMessage(response.reply);
+    if (rage == 10) {
+        // initiate next sequence!
+        gameLevel2()
+    }
+    else {
+        setRage(rage);
+        recieveMessage(response.reply);
+        
+    }
 
     console.log(response.reply, rage);    
 })
@@ -204,4 +210,17 @@ async function gameCutscene(){
     document.querySelector('.actions').style.animation = 'fadeIn 1s ease forwards'
 }
 
-gameCutscene()
+document.querySelector('.phone-button').addEventListener('click', () => {
+    document.querySelector('a.tip').style.animation = 'fadeOut 1s ease forwards'
+    gameCutscene();
+    document.querySelector('.phone>video').style.animation = 'turnOn 5s ease forwards'
+    const audio = document.createElement("audio");
+    audio.src = "music/horror.mp3"
+    audio.volume = 0.4;
+    audio.play();
+})
+
+function gameLevel2()
+{
+    window.location = 'typing.html'
+}

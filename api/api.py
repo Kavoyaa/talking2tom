@@ -17,7 +17,7 @@ CORS(app)
 
 @app.route("/")
 def index():
-    return send_from_directory("../frontend", "index.html")
+    return send_from_directory("../frontend", "home.html")
 
 @app.route("/<path:filename>")
 def frontend_files(filename):
